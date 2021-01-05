@@ -21,7 +21,7 @@ client.once('ready', () => {
 });
 
 client.on('message', message => {
-  if (!message.content.startsWith(prefix) || message.author.bot && message.author.id != '731303466072408145') return;
+  if (!message.content.startsWith(prefix)) return;
   if(message.channel.type === `dm`) return;
 
 	const args = message.content.slice(prefix.length).split(/ +/);
@@ -29,12 +29,6 @@ client.on('message', message => {
      if (command === 'licence') {
         client.commands.get('licence').execute(message, args);
         }
-        if (command === 'unwhitelist') {
-            if(message.author.id != '694644198531661844') return
-        db.delete(`whitelist_${message.guild.id}`)
-        }
-         whitelist = db.get(`whitelist_${message.guild.id}`)
-  if(message.guild.id != whitelist) return
   if (command === 'pay') {
         client.commands.get('pay').execute(message, args);
         }
@@ -44,10 +38,6 @@ client.on('message', message => {
         }
       if (command === 'buy') {
         client.commands.get('buy').execute(message, args);
-      }
-      if (command === 'createstore') {
-          if(message.guild.id != '720404658207719465') return
-        client.commands.get('createstore').execute(message, args);
       }
       if (command === 'balance') {
         client.commands.get('bal').execute(message, args);
@@ -86,17 +76,6 @@ client.on('message', message => {
         client.commands.get('leaderboard').execute(message, args);
         }
     });
-client.on('message', message => {
-    if(message.channel.type === `dm`){
-		if(message.author.bot) return;
-		let embed = new Discord.MessageEmbed()
-		.setAuthor(`From: ${message.author.username}`)
-		.setColor('#000ff')
-		.setDescription(message.content)
-		.setFooter(`Author ID: ${message.author.id}`);
-		client.channels.cache.get('744332384870334480').send(embed);
-    }
-});
 client.on('message', message => {
     if(message.channel.type === `dm`) return
     if(message.author.bot) return
